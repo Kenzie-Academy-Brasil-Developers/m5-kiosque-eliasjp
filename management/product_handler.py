@@ -11,7 +11,10 @@ def get_product_by_id (id):
     return {}
 
         
-def get_products_by_type (type):
+def get_products_by_type (type_str: str):
+    if type(type_str) != str:
+        raise(TypeError("product type must be a str"))
+
     filtered = []
 
     for x in products:
