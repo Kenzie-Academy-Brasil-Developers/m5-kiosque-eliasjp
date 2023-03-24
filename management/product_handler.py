@@ -54,3 +54,11 @@ def menu_report ():
     avg_price = sum_price / count
 
     return f"Products Count: {count} - Average Price: ${round(avg_price, 2)} - Most Common Type: {most_item_position}"
+
+def get_product_by_id (id: int) -> dict:
+    if type(id) != int:
+        raise(TypeError("product id must be an int"))
+
+    for item in products:
+        if item["_id"] == id:
+            return item
