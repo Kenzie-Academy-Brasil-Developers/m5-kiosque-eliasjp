@@ -18,7 +18,7 @@ def get_products_by_type (type_str: str):
     filtered = []
 
     for x in products:
-        if (x["type"] == type):
+        if (x["type"] == type_str):
             filtered.append(x)
         
     return filtered
