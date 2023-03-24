@@ -1,4 +1,4 @@
-from management.product_handler import  menu_report
+from management.product_handler import  menu_report, get_product_by_id
 # from management.tab_handler import calculate_tab
 
 if __name__ == "__main__":
@@ -7,4 +7,5 @@ if __name__ == "__main__":
     # print(add_product())
     # print(calculate_tab())
     print(menu_report())
+    print(get_product_by_id([4123412]))
     ...
