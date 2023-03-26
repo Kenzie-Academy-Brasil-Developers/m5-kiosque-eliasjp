@@ -1,4 +1,5 @@
 from menu import products
+from management.sortBy import sortById
 
 def get_product_by_id (id):
     if type(id) != int:
@@ -9,7 +10,6 @@ def get_product_by_id (id):
             return x
         
     return {}
-
         
 def get_products_by_type (type_str: str):
     if type(type_str) != str:
@@ -25,20 +25,15 @@ def get_products_by_type (type_str: str):
 
 def add_product (product_list: list, **dict_item: dict) -> dict:
     index = 1
+    product_list.sort(key=sortById)
 
     if len(product_list) == 0:
         dict_item.update({ "_id": index })
-        product_list.append(dict_item)
-        return dict_item
-
-    for item in product_list:
-        if item["_id"] >= index:
-            index = item["_id"] + 1
-
+    else:
+        index = product_list[-1]["_id"] + 1
 
     dict_item.update({ "_id": index })
     product_list.append(dict_item)
-            
     return dict_item
 
 def menu_report ():
@@ -55,7 +50,7 @@ def menu_report ():
         else :
             types_dictionary.update({ item["type"]: type_item + 1 })
 
-    most_item_position = list(types_dictionary.keys())[list(types_dictionary.values()).index(max(list(types_dictionary.values())))]
+    most_item_position = max(types_dictionary, key=types_dictionary.get)
 
     avg_price = sum_price / count
 
@@ -74,19 +69,13 @@ def add_product_extra (menu: list, *required: tuple, **new_product: dict) -> dic
             new_product.pop(dict_key)
 
     index = 1
+    menu.sort(key=sortById)
 
     if len(menu) == 0:
         new_product.update({ "_id": index })
-        menu.append(new_product)
-        return new_product
-
-    for item in menu:
-        if item["_id"] >= index:
-            index = item["_id"] + 1
-
+    else:
+        index = menu[-1]["_id"] + 1
 
     new_product.update({ "_id": index })
     menu.append(new_product)
-    
-
     return new_product
